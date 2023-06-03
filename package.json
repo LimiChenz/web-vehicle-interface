@@ -24,8 +24,11 @@
     "@nestjs/common": "^9.0.0",
     "@nestjs/core": "^9.0.0",
     "@nestjs/platform-express": "^9.4.0",
+<<<<<<< HEAD
     "@types/express-session": "^1.17.7",
     "express-session": "^1.17.3",
+=======
+>>>>>>> f58e48f63f3794cd65ecf6d88d956f762d34e94e
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0"
