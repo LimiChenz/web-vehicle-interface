@@ -10,13 +10,14 @@ import {
 } from '@nestjs/common';
 import { IndexService } from './index.service';
 import { Response } from 'express';
+import { CreateIndexDto, GetIndexDto } from './dto/IndexDto';
 
 @Controller('/index')
 export class IndexController {
   constructor(private readonly appService: IndexService) {}
 
   @Get(':id')
-  getHello(@Param() params: { id: string }, @Res() res: Response): void {
+  getHello(@Param() params: GetIndexDto, @Res() res: Response): void {
     console.log(this.appService.getHello(params.id));
     try {
       throw new HttpException(
@@ -33,7 +34,7 @@ export class IndexController {
   }
 
   @Post()
-  postHello(@Body() data: { test: '12345' }, @Res() res: Response): void {
+  postHello(@Body() data: CreateIndexDto, @Res() res: Response): void {
     res.send(JSON.stringify(data));
   }
 }
