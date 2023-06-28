@@ -6,6 +6,7 @@ import {
   HttpStatus,
   Param,
   Post,
+  Put,
   Res,
   UploadedFile,
   UseInterceptors,
@@ -17,27 +18,22 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { createWriteStream } from 'fs';
 import { join } from 'path';
+import { TransformInterceptor } from 'src/common/interceptors/transform.interceptor';
 
 @Controller('/index')
 export class IndexController {
   constructor(private readonly appService: IndexService) {}
 
   @Get(':id')
-  getHello(@Param() params: GetIndexDto, @Res() res: Response): void {
-    let _result = this.appService.getHello(params.id);
-    // try {
-    //   throw new HttpException(
-    //     {
-    //       errMsg: 'error request',
-    //       data: [],
-    //       status: 400,
-    //     },
-    //     HttpStatus.BAD_REQUEST,
-    //   );
-    // } catch (error) {
-    //   res.status(error.status).json(error.getResponse());
-    // }
-    res.send(_result);
+  getHello(@Param() params: GetIndexDto, @Res() res: Response) {
+    res.send(this.appService.getHello(params.id));
+  }
+
+  @Put('/findError')
+  findError(@Res() res: Response) {
+    const a: any = {};
+    console.log(a.b.c);
+    res.send(a);
   }
 
   @Post()
