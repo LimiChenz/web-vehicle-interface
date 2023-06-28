@@ -29,7 +29,6 @@ import { UserModule } from './module/user/user.module';
       autoLoadEntities: true,
       synchronize: true, //development 开启 production 关闭
     }),
-    ,
     LoggerModule,
   ],
   providers: [

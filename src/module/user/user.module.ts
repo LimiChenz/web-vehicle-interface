@@ -4,11 +4,12 @@ import { UserService } from './user.service';
 import { LoggerMiddleware } from 'src/common/middleware/request.middleware';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
+import { GlobalLoggerService } from 'src/common/logger/logger.service';
 
 @Module({
   imports: [TypeOrmModule.forFeature([User])],
   controllers: [UserController],
-  providers: [UserService],
+  providers: [UserService, GlobalLoggerService],
 })
 export class UserModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
