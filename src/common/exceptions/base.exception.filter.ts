@@ -6,17 +6,18 @@ import {
   ArgumentsHost,
   HttpStatus,
   ServiceUnavailableException,
-  HttpException,
 } from '@nestjs/common';
+import { GlobalLoggerService } from '../logger/logger.service';
 
-@Catch(HttpException)
+@Catch()
 export class AllExceptionsFilter implements ExceptionFilter {
+  constructor(private readonly logger: GlobalLoggerService) {}
   catch(exception: Error, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response>();
     const request = ctx.getRequest<Request>();
 
-    // request.log.error(exception);
+    this.logger.error(exception.message, exception.stack);
 
     response.status(HttpStatus.SERVICE_UNAVAILABLE).send({
       statusCode: HttpStatus.SERVICE_UNAVAILABLE,

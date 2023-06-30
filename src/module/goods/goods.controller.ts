@@ -7,22 +7,22 @@ export class GoodsController {
   constructor(private readonly goodsService: GoodsService) {}
 
   @Get()
-  getGoodsList(@Param() params: any, @Res() res: Response): void {
-    res.send('ok');
+  getGoodsList(@Param() params: any) {
+    return 'ok';
   }
 
   @Get(':goodsId')
-  findOneGoods(@Param() params: any, @Res() res: Response): void {
-    res.send('ok');
+  findOneGoods(@Param() params: any) {
+    return 'ok';
   }
 
   @Post()
-  createGoods(@Body() data: any, @Res() res: Response): void {
-    res.send('ok');
+  createGoods(@Body() data: any) {
+    return 'ok';
   }
 
   @Get()
-  exportGoodsList(@Param() params: any, @Res() res: Response): void {
-    res.send('ok');
+  exportGoodsList(@Param() params: any) {
+    return 'ok';
   }
 }

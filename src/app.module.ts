@@ -10,25 +10,16 @@ import { APP_INTERCEPTOR } from '@nestjs/core';
 import { AllExceptionsFilter } from './common/exceptions/base.exception.filter';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './module/user/user.module';
+import { MysqlConfig, OriginMysqlConfig } from './config/mysql.config';
+import { GoodsModule } from './module/goods/goods.module';
 
 @Module({
   imports: [
     ScheduleModule.forRoot(),
     IndexcModule,
     UserModule,
-    TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: 'localhost',
-      port: 3311,
-      username: 'root',
-      password: '/np&uYDjz3&*',
-      database: 'chen_db',
-      entities: [],
-      retryDelay: 500,
-      retryAttempts: 10,
-      autoLoadEntities: true,
-      synchronize: true, //development 开启 production 关闭
-    }),
+    GoodsModule,
+    TypeOrmModule.forRoot(OriginMysqlConfig),
     LoggerModule,
   ],
   providers: [

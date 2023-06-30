@@ -1,7 +1,7 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity({ name: 'biz_goods' }) // 替换为实际的表名
-export class MyEntity {
+export class Goods {
   @PrimaryGeneratedColumn()
   id: number;
 

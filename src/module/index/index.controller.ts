@@ -25,35 +25,17 @@ export class IndexController {
   constructor(private readonly appService: IndexService) {}
 
   @Get(':id')
-  getHello(@Param() params: GetIndexDto, @Res() res: Response) {
-    res.send(this.appService.getHello(params.id));
-  }
-
-  @Put('/findError')
-  findError(@Res() res: Response) {
-    const a: any = {};
-    console.log(a.b.c);
-    res.send(a);
+  getHello(@Param() params: GetIndexDto) {
+    return this.appService.getHello(params.id);
   }
 
   @Post()
-  postHello(@Body() data: CreateIndexDto, @Res() res: Response): void {
-    res.send(JSON.stringify(data));
+  postHello(@Body() data: CreateIndexDto): string {
+    return JSON.stringify(data);
   }
 
   @Post('upload')
-  @UseInterceptors(
-    FileInterceptor('file', {
-      // storage: diskStorage({
-      //   destination: './uploads',
-      //   filename: (req, file, callback) => {
-      //     const uniqueSuffix =
-      //       Date.now() + '-' + Math.round(Math.random() * 1e9);
-      //     callback(null, file.originalname + '-' + uniqueSuffix);
-      //   },
-      // }),
-    }),
-  )
+  @UseInterceptors(FileInterceptor('file', {}))
   async uploadFile(
     @UploadedFile() file: Express.Multer.File | Array<Express.Multer.File>,
     @Res() res: Response,
@@ -70,9 +52,9 @@ export class IndexController {
         const writeStream = createWriteStream(_path);
         writeStream.write(file.buffer);
 
-        res.send({ code: 200, msg: '文件上传成功', path: _path });
+        return { code: 200, msg: '文件上传成功', path: _path };
       } catch (error) {
-        res.send({ code: 500, msg: '上传文件错误' });
+        return { code: 500, msg: '上传文件错误' };
       }
     };
     if (Array.isArray(file)) {

@@ -9,14 +9,7 @@ import { TransformInterceptor } from 'src/common/interceptors/transform.intercep
 @Module({
   imports: [],
   controllers: [IndexController],
-  providers: [
-    IndexService,
-    GlobalLoggerService,
-    {
-      provide: APP_INTERCEPTOR,
-      useClass: TransformInterceptor,
-    },
-  ],
+  providers: [IndexService, GlobalLoggerService],
 })
 export class IndexcModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
