@@ -7,8 +7,9 @@ export class GoodsController {
   constructor(private readonly goodsService: GoodsService) {}
 
   @Get()
-  getGoodsList(@Param() params: any) {
-    return 'ok';
+  async getGoodsList(@Param() params: any) {
+    const data = await this.goodsService.getGoodsList();
+    return data;
   }
 
   @Get(':goodsId')
