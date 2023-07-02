@@ -10,8 +10,11 @@ export class GoodsService {
     private readonly catRepository: Repository<Goods>,
   ) {}
 
-  getCoodsList = async () => {
-    return await this.catRepository.find();
+  getCoodsList = async (params: { page: number; page_size: number }) => {
+    return await this.catRepository.find({
+      skip: params.page,
+      take: params.page_size,
+    });
   };
 
   getGoodsByOne = async (id: number) => {

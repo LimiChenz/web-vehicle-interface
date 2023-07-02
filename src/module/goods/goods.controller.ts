@@ -16,8 +16,8 @@ export class GoodsController {
   constructor(private readonly goodsService: GoodsService) {}
 
   @Get()
-  async getGoodsList(@Param() params: any) {
-    const data = await this.goodsService.getCoodsList();
+  async getGoodsList(@Param() params: { page: number; page_size: number }) {
+    const data = await this.goodsService.getCoodsList(params);
     return data;
   }
 
