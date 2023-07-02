@@ -19,7 +19,7 @@ import { GoodsModule } from './module/goods/goods.module';
     IndexcModule,
     UserModule,
     GoodsModule,
-    TypeOrmModule.forRoot(OriginMysqlConfig),
+    TypeOrmModule.forRoot(MysqlConfig),
     LoggerModule,
   ],
   providers: [
