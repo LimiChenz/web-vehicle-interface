@@ -5,10 +5,12 @@ import {
   Get,
   Param,
   Post,
+  Put,
+  Query,
   Res,
 } from '@nestjs/common';
 import { GoodsService } from './goods.service';
-import { Response } from 'express';
+import { Response, query } from 'express';
 import { GetGoodsDto } from './dto/goodsDto';
 
 @Controller('/goods')
@@ -16,8 +18,8 @@ export class GoodsController {
   constructor(private readonly goodsService: GoodsService) {}
 
   @Get()
-  async getGoodsList(@Param() params: { page: number; page_size: number }) {
-    const data = await this.goodsService.getCoodsList(params);
+  async getGoodsList(@Query() query: { page: number; page_size: number }) {
+    const data = await this.goodsService.getGoodsList(query);
     return data;
   }
 
@@ -38,6 +40,12 @@ export class GoodsController {
   async deleteGoods(@Param() params: GetGoodsDto) {
     const id = Number(params.goods_id);
     const result = await this.goodsService.deleteGoods(id);
+    return result;
+  }
+
+  @Put()
+  async updateGoods(@Body() data: any) {
+    const result = await this.goodsService.updateGoods(data);
     return result;
   }
 
